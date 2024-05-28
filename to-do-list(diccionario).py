@@ -1,6 +1,6 @@
-# Programa de Python que sirve para tener una check-list hecha con listas de python
+# Programa de Python que sirve para tener una check-list hechas con diccionarios de python
 option = None
-lista_tareas = ['hola', 'adios','queloque']
+lista_tareas = {'1':'hola', '2':'adios','3':'queloque'}
 
 
 def menu():
@@ -22,14 +22,21 @@ def main():
     while option != 5:
         option = menu()
         if option == 1:
-            for i in range(len(lista_tareas)):
-                print(f"{i+1} {lista_tareas[i]}")
+            for key,value in lista_tareas.items():
+                print(f"{key}- {value}")
         elif option == 2:
-            añadir = input('Que tearea quieres añadir a la lista de tareas: ')
-            lista_tareas.append(añadir)
+            tarea_añadir = input('Que tearea quieres añadir a la lista de tareas: ')
+            num_tarea_añadir = len(lista_tareas) +1
+            lista_tareas.update({num_tarea_añadir:tarea_añadir})
         elif option == 3:
-            quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-            lista_tareas.pop(quitar-1)
+            reordered_tasks = {}
+            new_key = 1
+            quitar = (input('Que tarea quieres elimilar de la lista de tareas: '))
+            lista_tareas.pop(quitar)
+            for key in sorted(lista_tareas.keys()):
+                reordered_tasks[new_key] = lista_tareas[key]
+                new_key +=1
+            return reordered_tasks
         elif option == 4:
             borrar = ""
             while borrar != 'Si' and borrar != 'No':
