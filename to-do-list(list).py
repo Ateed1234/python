@@ -12,6 +12,8 @@ def menu():
     print('5- Salir')
     print('=========================================')
     option = int(input('Escoje una opcion: '))
+    if len(str(option)) != 1:
+        print('Escoje un numero de las oprciones anteriores.')
     return option
 
 def main():
@@ -26,8 +28,8 @@ def main():
             añadir = input('Que tearea quieres añadir a la lista de tareas: ')
             lista_tareas.append(añadir)
         elif option == 3:
-            quitar = input('Que tarea quieres elimilar de la lista de tareas: ')
-            lista_tareas.remove(quitar)
+            quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+            lista_tareas.pop(quitar-1)
         elif option == 4:
             borrar = ""
             while borrar != 'Si' and borrar != 'No':
@@ -37,7 +39,7 @@ def main():
             elif borrar == 'No':
                 print('Gracias por confirmar, la lista de tareas no va a ser borrada.')
             else:
-                print('Confirma si vaciar la lista de tareas o no.')
+                print('Confirma si quieres vaciar la lista de tareas o no.')
     
 
 if __name__ == "__main__":
