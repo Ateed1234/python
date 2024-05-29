@@ -11,10 +11,43 @@ def menu():
     print('4- Vaciar lista de tareas.')
     print('5- Salir')
     print('=========================================')
-    option = int(input('Escoje una opcion: '))
-    if len(str(option)) != 1:
-        print('Escoje un numero de las oprciones anteriores.')
-    return option
+    try:
+        option = int(input('Escoje una opcion: '))
+        if len(str(option)) != 1:
+            print('Escoje un numero de las oprciones anteriores.')
+        return option
+    except ValueError:
+        print('Escoje un numero de la lista.')
+
+def opcion1():
+    for i in range(len(lista_tareas)):
+        print(f"{i+1} {lista_tareas[i]}")
+
+def opcion2():
+    añadir = input('Que tearea quieres añadir a la lista de tareas: ')
+    while añadir == '':
+        print('Escribe una tarea para añadir en la lista.')
+        añadir = input('Que tearea quieres añadir a la lista de tareas: ')
+    lista_tareas.append(añadir)
+
+def opcion3():
+    quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+    while quitar>len(lista_tareas):
+        print('Escoje un numero que este dentro de la lista para aliminar esa tarea.')
+        quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+    lista_tareas.pop(quitar-1)
+
+def opcion4():
+    borrar = ""
+    while borrar != 'Si' and borrar != 'No':
+        borrar = input('Estas seguro que quieres borrar la lista de tareas? ')
+    if borrar == 'Si':
+        lista_tareas.clear()                  
+    elif borrar == 'No':
+        print('Gracias por confirmar, la lista de tareas no va a ser borrada.')
+    else:
+        pass
+
 
 def main():
     global lista_tareas 
@@ -22,24 +55,13 @@ def main():
     while option != 5:
         option = menu()
         if option == 1:
-            for i in range(len(lista_tareas)):
-                print(f"{i+1} {lista_tareas[i]}")
+            opcion1()
         elif option == 2:
-            añadir = input('Que tearea quieres añadir a la lista de tareas: ')
-            lista_tareas.append(añadir)
+            opcion2()
         elif option == 3:
-            quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-            lista_tareas.pop(quitar-1)
+            opcion3()
         elif option == 4:
-            borrar = ""
-            while borrar != 'Si' and borrar != 'No':
-                borrar = input('Estas seguro que quieres borrar la lista de tareas? ')
-            if borrar == 'Si':
-                lista_tareas.clear()                  
-            elif borrar == 'No':
-                print('Gracias por confirmar, la lista de tareas no va a ser borrada.')
-            else:
-                print('Confirma si quieres vaciar la lista de tareas o no.')
+            opcion4()
     
 
 if __name__ == "__main__":
