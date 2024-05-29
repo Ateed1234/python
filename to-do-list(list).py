@@ -31,22 +31,26 @@ def opcion2():
     lista_tareas.append(añadir)
 
 def opcion3():
-    quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-    while quitar>len(lista_tareas):
-        print('Escoje un numero que este dentro de la lista para aliminar esa tarea.')
-        quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-    lista_tareas.pop(quitar-1)
+    quitar = None
+    while quitar not in range(len(lista_tareas)):
+        try:
+            quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+            while quitar>len(lista_tareas) or quitar == 0:
+                print('Escoje un numero que este dentro de la lista para aliminar esa tarea.')
+                quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+            lista_tareas.pop(quitar-1)
+        except ValueError:
+            print('Escoje un numero que este dentro de la lista para aliminar esa tarea.')
 
 def opcion4():
     borrar = ""
     while borrar != 'Si' and borrar != 'No':
         borrar = input('Estas seguro que quieres borrar la lista de tareas? ')
     if borrar == 'Si':
-        lista_tareas.clear()                  
-    elif borrar == 'No':
-        print('Gracias por confirmar, la lista de tareas no va a ser borrada.')
+        lista_tareas.clear()
+        print('Lista de tareas borrada.')                  
     else:
-        pass
+        print('Gracias por confirmar, la lista de tareas no va a ser borrada.')
 
 
 def main():
