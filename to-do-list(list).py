@@ -27,27 +27,32 @@ def opcion1():
         print(f"{i+1} {lista_tareas[i]}")
 
 def opcion2():
-    añadir = input('Que tearea quieres añadir a la lista de tareas: ')
-    while añadir == '':
+    añadir_tarea = input('Que tearea quieres añadir a la lista de tareas: ')
+    while añadir_tarea == '':
         print('Escribe una tarea para añadir en la lista.')
-        añadir = input('Que tearea quieres añadir a la lista de tareas: ')
-    lista_tareas.append(añadir)
+        añadir_tarea = input('Que tearea quieres añadir a la lista de tareas: ')
+    lista_tareas.append(añadir_tarea)
 
 def opcion3():     
-    quitar = None
-    while quitar not in range(len(lista_tareas)):
+    quitar_tarea = None
+    while quitar_tarea not in range(len(lista_tareas)):
         if len(lista_tareas) == 0:
             print('La lista de tareas esta vacia, añade tareas para poder borrarlas cuando se completen')
             break
         try:
-            quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-            while quitar>len(lista_tareas) or quitar == 0:
+            quitar_tarea = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+            while quitar_tarea>len(lista_tareas) or quitar_tarea == 0:
                 print('Escoje un numero que este dentro de la lista para aliminar esa tarea.')
-                quitar = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-            lista_tareas.pop(quitar-1)
+                opcion1()
+                quitar_tarea = int(input('Que tarea quieres elimilar de la lista de tareas: '))
+            lista_tareas.pop(quitar_tarea-1)
             break
         except ValueError:
-            print('Escoje un numero valido que esté dentro de la lista para eliminarlo.')
+            confirmar_opcion = input('Seguro que quires eliminar una tarea? ')
+            if confirmar_opcion.lower() == 'no':
+                break 
+            print('Escoje un numero valido de que esté dentro de la siguiente lista para eliminarlo:')
+            opcion1()           
 
 def opcion4():
     borrar = ""
