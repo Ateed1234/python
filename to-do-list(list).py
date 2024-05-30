@@ -2,8 +2,9 @@
 option = None
 lista_tareas = ['hola', 'adios','queloque']
 
-
+#Printear menu de opciones y escojer una opcion
 def menu():
+    print(' ')
     print('=========================================')
     print('1- Ver lista de tareas.')
     print('2- Añadir tarea.')
@@ -11,6 +12,7 @@ def menu():
     print('4- Vaciar lista de tareas.')
     print('5- Salir')
     print('=========================================')
+    print(' ')
     try:
         option = int(input('Escoje una opcion: '))
         if len(str(option)) != 1:
@@ -19,20 +21,25 @@ def menu():
     except ValueError:
         print('Escoje un numero de la lista.')
 
+# Mostrar lista de tareas
 def opcion1():
     if len(lista_tareas) == 0:
         print('La lista esta vacia, por favor añade tareas para poder listarlas.')
         quit
+    print(' ')
     for i in range(len(lista_tareas)):
         print(f"{i+1} {lista_tareas[i]}")
 
+# Añadir tarea a la lista
 def opcion2():
     añadir_tarea = input('Que tearea quieres añadir a la lista de tareas: ')
     while añadir_tarea == '':
         print('Escribe una tarea para añadir en la lista.')
         añadir_tarea = input('Que tearea quieres añadir a la lista de tareas: ')
     lista_tareas.append(añadir_tarea)
+    print('Nueva tarea añadida en la lista')
 
+# Eliminar tarea de la lista
 def opcion3():     
     quitar_tarea = None
     while quitar_tarea not in range(len(lista_tareas)):
@@ -46,6 +53,7 @@ def opcion3():
                 opcion1()
                 quitar_tarea = int(input('Que tarea quieres elimilar de la lista de tareas: '))
             lista_tareas.pop(quitar_tarea-1)
+            print('Tarea eliminada de la lista.')
             break
         except ValueError:
             confirmar_opcion = input('Seguro que quires eliminar una tarea? ')
@@ -54,6 +62,7 @@ def opcion3():
             print('Escoje un numero valido de que esté dentro de la siguiente lista para eliminarlo:')
             opcion1()           
 
+# Vaciar lista de tareas
 def opcion4():
     borrar = ""
     while borrar.lower() != 'si' and borrar != 'no':
