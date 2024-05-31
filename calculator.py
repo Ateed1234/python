@@ -1,6 +1,5 @@
 # App que se puede usar como calculadore
 
-
 def main():
     num_final = int(input('Dime un numero: '))  # Initialize with the first number
     operator = None
