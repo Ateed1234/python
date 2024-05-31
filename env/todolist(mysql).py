@@ -42,7 +42,7 @@ def menu():
     print(' ')
     try:
         option = int(input('Escoje una opcion: '))
-        if len(str(option)) != 1:
+        if option  not in range(1,6):
             print('Escoje un numero de las oprciones anteriores.')
         return option
     except ValueError as e:
@@ -69,11 +69,25 @@ def opcion2(conexion):
 
 # Eliminar tarea de la base de datos
 def opcion3(conexion):
-  quitar_tarea = int(input('Que tarea quieres elimilar de la lista de tareas: '))
-  sql = f"DELETE FROM tareas where ID={quitar_tarea}"
-  mycursor = conexion.cursor()
-  mycursor.execute(sql)
-  conexion.commit()
+  quitar_tarea = None
+  try:
+    quitar_tarea = input('Que tarea quieres elimilar de la lista de tareas: ')
+    # Comprobar que la tarea esta dentro de la lista y borrarla
+    sql = f"select ID from tareas"
+    mycursor = conexion.cursor()
+    mycursor.execute(sql)
+    mylist = mycursor.fetchall()
+    for (ID) in mylist:
+      if ID == quitar_tarea:
+        sql = f"DELETE FROM tareas where ID={quitar_tarea}"
+        mycursor = conexion.cursor()
+        mycursor.execute(sql)
+        conexion.commit()
+      else:
+        print('Escoje una tarea que este dentro de la lista para borrarla.')
+        break 
+  finally:
+    pass
 
 # Vaciar la base de datos
 def opcion4(conexion):
@@ -118,3 +132,8 @@ if __name__ == "__main__":
 
 
 
+
+#sql = f"DELETE FROM tareas where ID={quitar_tarea}"
+ #   mycursor = conexion.cursor()
+  #  mycursor.execute(sql)
+   # conexion.commit()
